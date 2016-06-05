@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
-namespace Web.Models {  
-    
+namespace Web.Models {
+   
     public class Task  {
- 
+
         public int GUID_Id { get; set; }
         
         public string Title { get; set; }

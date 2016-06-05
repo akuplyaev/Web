@@ -1,7 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using System;
+using Newtonsoft.Json;
 using System.Web.Http;
+using System.Xml;
+using Newtonsoft.Json.Serialization;
 
 [assembly: OwinStartup(typeof(Web.Startup))]
 
@@ -13,7 +15,14 @@ namespace Web {
                 name: "Default",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-                );         
+                );
+            // для ответов ввиде JSON
+            var jSonProp = config.Formatters.JsonFormatter.SerializerSettings;
+            jSonProp.Formatting = Newtonsoft.Json.Formatting.Indented;
+            jSonProp.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            var xml = config.Formatters.XmlFormatter;
+            config.Formatters.Remove(xml);
+
             app.UseWebApi(config);
         }
     }

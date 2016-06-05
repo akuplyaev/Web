@@ -15,15 +15,14 @@ namespace Web {
             new Task (2,"test2",new DateTime(2016,08,13)),
             new Task (3,"test3",new DateTime(2017,03,14))
         };
-
         //get
-        public IEnumerable<Task> Get() {
+        public List<Task> Get() {                      
             return Tasks;
         }
         //get(task)
         public Task Get(int id) {
             var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
-
+            
             if (task == null) {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }

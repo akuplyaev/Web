@@ -21,22 +21,22 @@ namespace Web {
             return Tasks;
         }
         //get(task)
-        public Task Get(int id) {
+        public IHttpActionResult Get(int id) {
             var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
 
             if (task == null) {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
             }
-            return task;
+            return Ok(Tasks);
         }
         //delete(task)
         public IHttpActionResult Delete(int id) {
             var Task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
             if (Task == null) {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
             }
             Tasks.Remove(Task);
-            return Ok();
+            return Ok(Tasks);
         }
         //post
         public IHttpActionResult Post(Task task) {
@@ -49,7 +49,7 @@ namespace Web {
                 return BadRequest("Exists");
             }
             Tasks.Add(task);
-            return Ok();
+            return Ok(Tasks);
         }
         //put
         public IHttpActionResult Put(Task task) {
@@ -58,12 +58,12 @@ namespace Web {
             }
             var FindTask = Tasks.FirstOrDefault(t => t.GUID_Id == task.GUID_Id);
             if (FindTask == null) {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
             }
             FindTask.Title = task.Title;
             FindTask.Deadline = task.Deadline;
 
-            return Ok();
+            return Ok(Tasks);
         }
     }
 
