@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Web {   
-    using System.IO;
+namespace Web {
+    using Microsoft.Owin;
     using AppFunc = Func<IDictionary<string, object>, Task>;
     class HelloTest {
         private readonly AppFunc _next;
@@ -13,12 +11,10 @@ namespace Web {
             _next = next;
         }
         
-        public  Task Invoke(IDictionary<string, object> env)
-        {         
-            var response = env["owin.ResponseBody"] as Stream;
-            using (var writer = new StreamWriter(response)) {
-                return writer.WriteAsync("Hello World");
-            }
+        public Task Invoke(IDictionary<string, object> env)
+        {
+            var response = new OwinResponse(env);
+            return response.WriteAsync("Hello World");
         }
     }
       
