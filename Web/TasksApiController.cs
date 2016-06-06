@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Web {
+namespace Web
+{
     using Models;
     using System.Net;
-    public class TasksController : ApiController {
+    public class TasksController : ApiController
+    {
         private static List<Task> Tasks = new List<Task>
         {
             new Task (1,"test1",new DateTime(2016,07,12)),
@@ -16,52 +18,95 @@ namespace Web {
             new Task (3,"test3",new DateTime(2017,03,14))
         };
         //get
-        public List<Task> Get() {                      
+        public List<Task> Get()
+        {
             return Tasks;
         }
         //get(task)
-        public Task Get(int id) {
+        public Task Get(int id)
+        {
             var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
-            
-            if (task == null) {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            try
+            {
+                if (task == null)
+                {
+                    throw new HttpResponseException(HttpStatusCode.NotFound);
+                }
+            }
+            catch (HttpResponseException e)
+            {
+                Console.WriteLine("Web-API:" + e.Message);
+                Console.WriteLine("Web-API:" + e.Response.StatusCode);
             }
             return task;
         }
         //delete(task)
-        public List<Task> Delete(int id) {
-            var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
-            if (task == null) {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+        public List<Task> Delete(int id)
+        {
+            try
+            {
+                var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
+                if (task == null)
+                {
+                    throw new  HttpResponseException(HttpStatusCode.NotFound);
+                }
+                Tasks.Remove(task);
             }
-            Tasks.Remove(task);
-            return  Tasks;
+            catch (HttpResponseException e)
+            {
+                Console.WriteLine("Web-API:" + e.Message);
+                Console.WriteLine("Web-API:" + e.Response.StatusCode);
+            }
+            return Tasks;
         }
         //post
-        public List<Task> Post(Task task) {           
-            if (task == null) {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
-            }
-            var TaskExists = Tasks.Any(t => t.GUID_Id == task.GUID_Id);
+        public List<Task> Post(Task task)
+        {          
+            try
+            {
+                if (task == null)
+                {
+                    throw new HttpResponseException(HttpStatusCode.BadRequest);
+                }
+                var TaskExists = Tasks.Any(t => t.GUID_Id == task.GUID_Id);
 
-            if (TaskExists) {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                if (TaskExists)
+                {
+                    throw new HttpResponseException(HttpStatusCode.BadRequest);
+                }
+            }
+            catch (HttpResponseException e)
+            {
+                Console.WriteLine("Web-API:" + e.Message);
+                Console.WriteLine("Web-API:" + e.Response.StatusCode);
             }
             Tasks.Add(task);
-            return Tasks;           
-        }
+            return Tasks;
+        } 
+       
         //put
-        public List<Task> Put(Task task) {
-            if (task == null) {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+        public List<Task> Put(int id,Task task)
+        {
+            try
+            {
+                if (task == null)
+                {
+                    throw new HttpResponseException(HttpStatusCode.BadRequest);
+                }         
+                 var FindTask = Tasks.FirstOrDefault(t => t.GUID_Id == id);           
+                if (FindTask == null)
+                {
+                    throw new HttpResponseException(HttpStatusCode.NotFound);                  
+                }
+                FindTask.GUID_Id = task.GUID_Id;
+                FindTask.Title = task.Title;
+                FindTask.Deadline = task.Deadline;
             }
-            var FindTask = Tasks.FirstOrDefault(t => t.GUID_Id == task.GUID_Id);
-            if (FindTask == null) {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            catch (HttpResponseException e)
+            {
+                Console.WriteLine("Web-API:" + e.Message);
+                Console.WriteLine("Web-API:" + e.Response.StatusCode);
             }
-            FindTask.Title = task.Title;
-            FindTask.Deadline = task.Deadline;
-
             return Tasks;
         }
     }

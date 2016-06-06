@@ -9,6 +9,10 @@ namespace Web.Models {
         public string Title { get; set; }
     
         public string Deadline { get; set; }
+        public Task()
+        {
+
+        }
 
         public Task(int guid, string title, DateTime deadline) {
             GUID_Id = guid;
@@ -16,5 +20,6 @@ namespace Web.Models {
             Deadline = deadline.ToShortDateString();
         }
     }
+    
 }
 
