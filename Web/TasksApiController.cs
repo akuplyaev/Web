@@ -8,7 +8,8 @@ using System.Web.Http;
 namespace Web
 {
     using Models;
-    using System.Net;
+    using System.Net;  
+    [RoutePrefix("api/application/tasks")]
     public class TasksController : ApiController
     {
         private static List<Task> Tasks = new List<Task>
@@ -17,12 +18,15 @@ namespace Web
             new Task (2,"test2",new DateTime(2016,08,13)),
             new Task (3,"test3",new DateTime(2017,03,14))
         };
-        //get
+        //get  
+        [Route("all")]
+        [Route("~/api/application/tasks")]
         public List<Task> Get()
         {
             return Tasks;
         }
         //get(task)
+        [Route("list/{id=1}")]
         public Task Get(int id)
         {
             var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
@@ -41,6 +45,7 @@ namespace Web
             return task;
         }
         //delete(task)
+        [Route("delete/{id=3}")]
         public List<Task> Delete(int id)
         {
             try
@@ -60,6 +65,7 @@ namespace Web
             return Tasks;
         }
         //post
+        [Route("add")]
         public List<Task> Post(Task task)
         {          
             try
@@ -85,6 +91,7 @@ namespace Web
         } 
        
         //put
+        [Route("change/{id=1}")]
         public List<Task> Put(int id,Task task)
         {
             try

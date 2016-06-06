@@ -16,10 +16,11 @@ namespace Web {
             {
                 app.Use<HelloTest>();           
                 var config = new HttpConfiguration();
+                config.MapHttpAttributeRoutes();
                 config.Routes.MapHttpRoute(
                     name: "Default",
                     routeTemplate: "api/{controller}/{id}",
-                    defaults: new { id = RouteParameter.Optional }
+                    defaults: new {controller="test",id = RouteParameter.Optional }
                     );                           
                 app.UseWebApi(config);
             }
