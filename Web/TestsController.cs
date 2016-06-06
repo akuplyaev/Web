@@ -23,7 +23,6 @@ namespace Web {
         //get(task)
         public IHttpActionResult Get(int id) {
             var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
-
             if (task == null) {
                 return NotFound();
             }
