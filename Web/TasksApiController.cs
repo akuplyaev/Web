@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Web {
     using Models;
     using System.Net;
+    using System.Web;
     [RoutePrefix("api/application/tasks")]
     public class TasksController : ApiController {
         private static List<Task> Tasks = new List<Task>
@@ -19,7 +18,7 @@ namespace Web {
         //get  
         [Route("all")]
         [Route("~/api/application/tasks")]
-        public List<Task> Get() {
+        public List<Task> Get(){             
             return Tasks;
         }
         //get(task)

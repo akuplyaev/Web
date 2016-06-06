@@ -15,7 +15,10 @@ namespace Web {
             if (response.Context.Request.Path.Value == "/") {
                 await response.WriteAsync("Hello World");
             }
-            await _next(env);
+            response.Headers.Add("X_TEST-ID", new string[] { "dasd" });
+            await _next.Invoke(env);
+          //  response.Headers.Add("X_TEST-ID", new string[] { "dasd" }); 
+            return;         
         }
     }
 }

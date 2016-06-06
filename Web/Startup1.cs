@@ -1,18 +1,14 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using Newtonsoft.Json;
 using System.Web.Http;
-using System.Xml;
-using Newtonsoft.Json.Serialization;
-using Web.Models;
-using System;
 
 [assembly: OwinStartup(typeof(Web.Startup))]
 
 namespace Web {
     public class Startup {       
         public void Configuration(IAppBuilder app) {
-            app.Use<HelloTest>();
+            // app.Use<HelloTest>();   
+            app.Use<ttt>();  
             var config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
@@ -26,7 +22,7 @@ namespace Web {
             jSonProp.ContractResolver = new CamelCasePropertyNamesContractResolver();
             var xml = config.Formatters.XmlFormatter;
             config.Formatters.Remove(xml); */
-            app.UseWebApi(config);
+            app.UseWebApi(config);                                                 
         }
     }
 }
