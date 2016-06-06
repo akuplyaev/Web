@@ -14,19 +14,13 @@ namespace Web {
         public void Configuration(IAppBuilder app) {
             try
             {
+                app.Use<HelloTest>();           
                 var config = new HttpConfiguration();
                 config.Routes.MapHttpRoute(
                     name: "Default",
                     routeTemplate: "api/{controller}/{id}",
                     defaults: new { id = RouteParameter.Optional }
-                    );
-                // для ответов ввиде JSON
-        /*        var jSonProp = config.Formatters.JsonFormatter.SerializerSettings;
-                jSonProp.Formatting = Newtonsoft.Json.Formatting.Indented;
-                jSonProp.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                var xml = config.Formatters.XmlFormatter;
-                config.Formatters.Remove(xml);*/
-
+                    );                           
                 app.UseWebApi(config);
             }
             catch (Exception e)

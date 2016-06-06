@@ -11,10 +11,14 @@ namespace Web {
             _next = next;
         }
         
-        public Task Invoke(IDictionary<string, object> env)
-        {
+        public async Task Invoke(IDictionary<string, object> env)
+        {            
             var response = new OwinResponse(env);
-            return response.WriteAsync("Hello World");
+          if(response.Context.Request.Path.Value=="/")
+            {
+                await response.WriteAsync("Hello World");
+            }
+            await _next(env);          
         }
     }
       
