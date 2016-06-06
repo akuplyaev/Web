@@ -1,10 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
-using Newtonsoft.Json;
 using System.Web.Http;
-using System.Xml;
-using Newtonsoft.Json.Serialization;
-using Web.Models;
 using System;
 
 [assembly: OwinStartup(typeof(Web.Startup))]
