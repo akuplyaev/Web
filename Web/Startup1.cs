@@ -11,11 +11,15 @@ namespace Web
     {
         public void Configuration(IAppBuilder app)
         {
-            app.Run(context =>
-            {
-                context.Response.ContentType = "text/html; charset=utf-8";
-                return context.Response.WriteAsync("Hello World!");
-            });
+            app.Use<HelloTest>();
+                                  
+           /*  app.Run(context =>
+             {
+                 return context.Response.WriteAsync("Hello world");
+
+             }); 
+           */ 
+
         }
     }
 }
