@@ -14,7 +14,7 @@ namespace Web
             app.Run(context =>
             {
                 context.Response.ContentType = "text/html; charset=utf-8";
-                return context.Response.WriteAsync("Hello world");
+                return context.Response.WriteAsync("Hello World!");
             });
         }
     }

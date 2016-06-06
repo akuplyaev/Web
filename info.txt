@@ -1,0 +1,11 @@
+http://ruseller.com/lessons.php?rub=28&id=1726
+http://www.codehint.ru/articles/2013-07-07_owin_getting_started/2
+
+
+http://metanit.com/sharp/aspnet5/2.8.php
+
+http://www.codeproject.com/Articles/869223/ASP-NET-Web-Api-Create-a-Self-Hosted-OWIN-Based-We
+
+http://metanit.com/sharp/aspnet_webapi/1.1.php
+
+https://habrahabr.ru/post/202018/
