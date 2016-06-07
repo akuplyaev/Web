@@ -13,15 +13,15 @@ namespace Web {
         public async  Task Invoke(IDictionary<string, object> env) {            
             var response = new OwinResponse(env);                     
             if (response.Context.Request.Path.Value == "/") {
-                await response.WriteAsync("Hello World");               
+               // await response.WriteAsync("Hello World");               
             }
             else {               
-                Console.WriteLine("midlware до");
-                response.Headers.Add("X_TEST-ID", new string[] { Guid.NewGuid().ToString() });
+                Console.WriteLine("midlware до");               
                 await _next.Invoke(env);
                 Console.WriteLine("midlware после");
-                response = new OwinResponse(env);                
-               // response.Headers.Add("X_TEST-ID", new string[] { Guid.NewGuid().ToString()});                
+                response = new OwinResponse(env);
+                response.Headers.Add("X_TEST-ID", new string[] { Guid.NewGuid().ToString() });
+                              
             }         
         }
     }

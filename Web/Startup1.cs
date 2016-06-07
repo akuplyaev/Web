@@ -18,7 +18,7 @@ namespace Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
                 );
-            //  app.Use<HelloTest>(); 
+             // app.Use<HelloTest>(); 
             /*      app.Use(async (context, next) =>
                    {
                        Console.WriteLine("До 1");
@@ -39,11 +39,11 @@ namespace Web
             app.Use(async (context, next) =>
             {
                 Console.WriteLine("до 3");
-                Console.WriteLine("X-TEST-ID:" + context.Response.Headers["X-TEST-ID"]);
+                Console.WriteLine("X-TEST-ID:" + context.Response.Headers["X-TEST-ID"]);                
                 await next();
                 Console.WriteLine("После 3");
                 //context.Response.Headers["X-TEST-ID"] = Guid.NewGuid().ToString();
-                context.Response.Headers.Add("X-TEST-ID",new string[] { System.Guid.NewGuid().ToString() });
+                context.Response.Headers.Add("X-TEST-ID",new string[] { Guid.NewGuid().ToString() });
                 Console.WriteLine("X-TEST-ID:" + context.Response.Headers["X-TEST-ID"]);
             }); 
             /* для ответов ввиде JSON  */
