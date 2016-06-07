@@ -19,7 +19,7 @@ namespace Web {
                 Console.WriteLine("midlware до");
                 response.Headers.Add("X_TEST-ID", new string[] { Guid.NewGuid().ToString() });
                 await _next.Invoke(env);
-                Console.WriteLine("midlware после"+response.Headers);
+                Console.WriteLine("midlware после");
                 response = new OwinResponse(env);                
                // response.Headers.Add("X_TEST-ID", new string[] { Guid.NewGuid().ToString()});                
             }         
