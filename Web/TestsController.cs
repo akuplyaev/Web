@@ -17,17 +17,17 @@ namespace Web {
         };
 
         //get
-        public IEnumerable<Task> Get() {
+        public async Task<IEnumerable<Task>> Get() {
             return Tasks;
         }
         //get(task)
-        public IHttpActionResult Get(int id) {
+        public async Task <IHttpActionResult> Get(int id) {
             var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
 
             if (task == null) {
                 return NotFound();
             }
-            return Ok(Tasks);
+            return Ok(task);
         }
         //delete(task)
         public IHttpActionResult Delete(int id) {
