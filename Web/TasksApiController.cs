@@ -24,7 +24,7 @@ namespace Web {
         }
         //get(task)
         [Route("list/{id=1}")]
-        public Task Get(int id) {
+        public  Task Get(int id) {
             var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
             try {
                 if (task == null) {

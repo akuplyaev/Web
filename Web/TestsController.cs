@@ -17,7 +17,7 @@ namespace Web {
         };
 
         //get
-        public  IEnumerable<Task> Get() {
+        public async Task<IEnumerable<Task>> Get() {
             return Tasks;
         }
         //get(task)
@@ -27,7 +27,6 @@ namespace Web {
             if (task == null) {
                 return NotFound();
             }
-            var req = await Request.Content.ReadAsStreamAsync();
             return Ok(task);
         }
         //delete(task)

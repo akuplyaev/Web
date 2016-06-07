@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using System;
 using System.Web.Http;
 
 [assembly: OwinStartup(typeof(Web.Startup))]
@@ -17,8 +18,30 @@ namespace Web {
             //  app.Use<HelloTest>(); 
             app.Use(async (context, next) =>
             {
+                Console.WriteLine("До 1");
+                Console.WriteLine("X-TEST-ID:" + context.Response.Headers["X-TEST-ID"]);
+                await next();
+                Console.WriteLine("После 1");
+                Console.WriteLine("X-TEST-ID:" + context.Response.Headers["X-TEST-ID"]);
+            });
+            app.Use(async (context, next) =>
+            {
+                Console.WriteLine("до 2");
+                Console.WriteLine("X-TEST-ID:" + context.Response.Headers["X-TEST-ID"]);
                 context.Response.Headers["X-TEST-ID"] = System.Guid.NewGuid().ToString();
-                await next.Invoke();              
+                await next();
+                Console.WriteLine("После 2");
+               // context.Response.Headers["X-TEST-ID"] = System.Guid.NewGuid().ToString();
+                //context.Response.Headers.Add("X-TEST-ID",new string[] { System.Guid.NewGuid().ToString() });            
+                Console.WriteLine("X-TEST-ID:"+context.Response.Headers["X-TEST-ID"]);
+            });
+            app.Use(async (context, next) =>
+            {
+                Console.WriteLine("до 3");
+                Console.WriteLine("X-TEST-ID:" + context.Response.Headers["X-TEST-ID"]);
+                await next();
+                Console.WriteLine("После 3");
+                Console.WriteLine("X-TEST-ID:" + context.Response.Headers["X-TEST-ID"]);
             });
             /* для ответов ввиде JSON  */
             /* var jSonProp = config.Formatters.JsonFormatter.SerializerSettings;
