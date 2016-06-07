@@ -8,6 +8,7 @@ using System.Web.Http;
 namespace Web {
     using Models;
     using System.Net;
+    using System.Net.Http;
     public class TestController : ApiController {
         private static List<Task> Tasks = new List<Task>
         {
@@ -17,17 +18,21 @@ namespace Web {
         };
 
         //get
-        public async Task<IEnumerable<Task>> Get() {
-            return Tasks;
+        public ActionResult<List<Task>> Get() {           
+            Console.WriteLine("apiTest");
+            ActionResult<List<Task>> response = new ActionResult<List<Task>>(Request,Tasks);           
+            return response;
         }
         //get(task)
-        public async Task <IHttpActionResult> Get(int id) {
-            var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
-
+        public HttpResponseMessage Get(int id) {           
+            var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);                       
             if (task == null) {
-                return NotFound();
+                HttpResponseMessage respon = Request.CreateResponse(HttpStatusCode.NotFound);
+                return respon;
             }
-            return Ok(task);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, task);          
+            response.Headers.Add("X-TEST-ID", new string[] { Guid.NewGuid().ToString() });
+            return response;
         }
         //delete(task)
         public IHttpActionResult Delete(int id) {
@@ -35,6 +40,7 @@ namespace Web {
             if (Task == null) {
                 return NotFound();
             }
+            Request.Content.Headers.Add("X-TEST-ID", new string[] { Guid.NewGuid().ToString() });
             Tasks.Remove(Task);
             return Ok(Tasks);
         }

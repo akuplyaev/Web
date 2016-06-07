@@ -19,7 +19,7 @@ namespace Web {
         [Route("all")]
         [Route("~/api/application/tasks")]
         public List<Task> Get(){
-            Console.WriteLine("api");           
+            Console.WriteLine("api");                      
             return Tasks;
         }
         //get(task)
