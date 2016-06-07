@@ -6,9 +6,8 @@ using System.Web.Http;
 
 namespace Web {
     public class Startup {       
-        public void Configuration(IAppBuilder app) {
-            // app.Use<HelloTest>();   
-            app.Use<ttt>();  
+        public void Configuration(IAppBuilder app) {            
+            app.Use<HelloTest>();  
             var config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
@@ -21,7 +20,7 @@ namespace Web {
             jSonProp.Formatting = Newtonsoft.Json.Formatting.Indented;
             jSonProp.ContractResolver = new CamelCasePropertyNamesContractResolver();
             var xml = config.Formatters.XmlFormatter;
-            config.Formatters.Remove(xml); */
+            config.Formatters.Remove(xml); */            
             app.UseWebApi(config);                                                 
         }
     }
