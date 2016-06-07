@@ -17,8 +17,8 @@ namespace Web {
             //  app.Use<HelloTest>(); 
             app.Use(async (context, next) =>
             {
-                context.Response.Headers["X_TEST-ID"] = System.Guid.NewGuid().ToString();
-                await next.Invoke();
+                context.Response.Headers["X-TEST-ID"] = System.Guid.NewGuid().ToString();
+                await next.Invoke();              
             });
             /* для ответов ввиде JSON  */
             /* var jSonProp = config.Formatters.JsonFormatter.SerializerSettings;
