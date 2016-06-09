@@ -10,16 +10,14 @@ namespace Web {
         public HelloTest(AppFunc next) {
             _next = next;
         }
-        
-        public async Task Invoke(IDictionary<string, object> env)
-        {            
-          var response = new OwinResponse(env);
-          if(response.Context.Request.Path.Value=="/")
-            {
+
+        public async Task Invoke(IDictionary<string, object> env) {
+            var response = new OwinResponse(env);
+            if (response.Context.Request.Path.Value == "/") {
                 await response.WriteAsync("Hello World");
             }
-            await _next(env);          
+            await _next(env);
         }
     }
-      
+
 }
