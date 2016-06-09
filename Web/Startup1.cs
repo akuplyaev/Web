@@ -9,23 +9,26 @@ using System;
 
 [assembly: OwinStartup(typeof(Web.Startup))]
 
-namespace Web {
-    public class Startup {       
-        public void Configuration(IAppBuilder app) {
-                app.Use<OwinException>();
-                app.Use<HelloTest>();
-                var webapiconfig = ConfigureWebApi();
-            app.Use(async (context, next) =>
-            {
-                try{
-                    await next();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Web-API:" + e.Message);                   
-                }
-            });
-            app.UseWebApi(webapiconfig);          
+namespace Web
+{
+    public class Startup
+    {
+        public void Configuration(IAppBuilder app)
+        {
+            var webapiconfig = ConfigureWebApi();
+            app.Use<OwinException>();
+            app.Use<HelloTest>();
+            //app.Use(async (context, next) =>
+            //{
+            //    try{
+            //        await next();
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        Console.WriteLine("Web-API:" + e.Message);                   
+            //    }
+            //});
+            app.UseWebApi(webapiconfig);
         }
 
         private HttpConfiguration ConfigureWebApi()
