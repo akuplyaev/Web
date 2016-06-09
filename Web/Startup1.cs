@@ -12,22 +12,21 @@ using System;
 namespace Web {
     public class Startup {       
         public void Configuration(IAppBuilder app) {
-            try
-            {
-                app.Use<HelloTest>();           
-                var config = new HttpConfiguration();
-                config.MapHttpAttributeRoutes();
-                config.Routes.MapHttpRoute(
-                    name: "Default",
-                    routeTemplate: "api/{controller}/{id}",
-                    defaults: new {controller="test",id = RouteParameter.Optional }
-                    );                           
-                app.UseWebApi(config);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Owin:"+e.Message);
-            }
+                app.Use<OwinException>();
+                app.Use<HelloTest>();
+                var webapiconfig = ConfigureWebApi();
+                app.UseWebApi(webapiconfig);          
+        }
+        private HttpConfiguration ConfigureWebApi()
+        {
+            var config = new HttpConfiguration();
+            config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+                name: "Default",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+                );
+            return config;
         }
     }
 }

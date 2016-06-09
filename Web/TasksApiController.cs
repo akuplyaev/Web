@@ -12,6 +12,7 @@ namespace Web
     [RoutePrefix("api/application/tasks")]
     public class TasksController : ApiController
     {
+
         private static List<Task> Tasks = new List<Task>
         {
             new Task (1,"test1",new DateTime(2016,07,12)),
@@ -40,7 +41,7 @@ namespace Web
             catch (HttpResponseException e)
             {
                 Console.WriteLine("Web-API:" + e.Message);
-                Console.WriteLine("Web-API:" + e.Response.StatusCode);
+                Console.WriteLine("Web-API:"+ e.Response.StatusCode);
             }
             return task;
         }
@@ -60,7 +61,7 @@ namespace Web
             catch (HttpResponseException e)
             {
                 Console.WriteLine("Web-API:" + e.Message);
-                Console.WriteLine("Web-API:" + e.Response.StatusCode);
+                Console.WriteLine("Web-API:"+id+ e.Response.StatusCode);
             }
             return Tasks;
         }
