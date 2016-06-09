@@ -15,6 +15,7 @@ namespace Web {
             var response = new OwinResponse(env);
             if (response.Context.Request.Path.Value == "/") {
                 await response.WriteAsync("Hello World");
+                //throw new Exception("PipelineException");
             }
             await _next(env);
         }

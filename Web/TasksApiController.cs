@@ -8,7 +8,7 @@ using System.Web.Http;
 namespace Web
 {
     using Models;
-    using System.Net;  
+    using System.Net;
     [RoutePrefix("api/application/tasks")]
     public class TasksController : ApiController
     {
@@ -41,7 +41,7 @@ namespace Web
             catch (HttpResponseException e)
             {
                 Console.WriteLine("Web-API:" + e.Message);
-                Console.WriteLine("Web-API:"+ e.Response.StatusCode);
+                Console.WriteLine("Web-API:" + e.Response.StatusCode);
             }
             return task;
         }
@@ -54,21 +54,21 @@ namespace Web
                 var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
                 if (task == null)
                 {
-                    throw new  HttpResponseException(HttpStatusCode.NotFound);
+                    throw new HttpResponseException(HttpStatusCode.NotFound);
                 }
                 Tasks.Remove(task);
             }
             catch (HttpResponseException e)
             {
                 Console.WriteLine("Web-API:" + e.Message);
-                Console.WriteLine("Web-API:"+id+ e.Response.StatusCode);
+                Console.WriteLine("Web-API:" + id + e.Response.StatusCode);
             }
             return Tasks;
         }
         //post
         [Route("add")]
         public List<Task> Post(Task task)
-        {          
+        {
             try
             {
                 if (task == null)
@@ -89,22 +89,22 @@ namespace Web
             }
             Tasks.Add(task);
             return Tasks;
-        } 
-       
+        }
+
         //put
         [Route("change/{id=1}")]
-        public List<Task> Put(int id,Task task)
+        public List<Task> Put(int id, Task task)
         {
             try
             {
                 if (task == null)
                 {
                     throw new HttpResponseException(HttpStatusCode.BadRequest);
-                }         
-                 var FindTask = Tasks.FirstOrDefault(t => t.GUID_Id == id);           
+                }
+                var FindTask = Tasks.FirstOrDefault(t => t.GUID_Id == id);
                 if (FindTask == null)
                 {
-                    throw new HttpResponseException(HttpStatusCode.NotFound);                  
+                    throw new HttpResponseException(HttpStatusCode.NotFound);
                 }
                 FindTask.GUID_Id = task.GUID_Id;
                 FindTask.Title = task.Title;

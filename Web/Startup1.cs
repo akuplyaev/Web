@@ -15,8 +15,20 @@ namespace Web {
                 app.Use<OwinException>();
                 app.Use<HelloTest>();
                 var webapiconfig = ConfigureWebApi();
-                app.UseWebApi(webapiconfig);          
+            app.Use(async (context, next) =>
+            {
+                try{
+                    await next();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Web-API:" + e.Message);
+                    // Console.WriteLine("Web-API:" + e.Response.StatusCode);
+                }
+            });
+            app.UseWebApi(webapiconfig);          
         }
+
         private HttpConfiguration ConfigureWebApi()
         {
             var config = new HttpConfiguration();
