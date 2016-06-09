@@ -8,6 +8,7 @@ using System.Web.Http;
 namespace Web {
     using Models;
     using System.Net;
+    using System.Net.Http;
     public class TestController : ApiController {
         private static List<Task> Tasks = new List<Task>
         {
@@ -23,8 +24,21 @@ namespace Web {
         //get(task)
         public IHttpActionResult Get(int id) {
             var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
-            if (task == null) {
-                return NotFound();
+            try
+            {
+                if (task == null)
+                {
+                    var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
+                    {
+                        Content = new StringContent(string.Format("No task with guid_id = {0}", id)),
+                        ReasonPhrase = "Task not found"
+                    };
+                    throw new HttpResponseException(resp);
+                }
+            }
+            catch(HttpResponseException e)
+            {
+                Console.WriteLine("Web API:"+e.Message);
             }
             return Ok(Tasks);
         }
