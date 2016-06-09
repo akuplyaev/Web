@@ -22,8 +22,7 @@ namespace Web {
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Web-API:" + e.Message);
-                    // Console.WriteLine("Web-API:" + e.Response.StatusCode);
+                    Console.WriteLine("Web-API:" + e.Message);                   
                 }
             });
             app.UseWebApi(webapiconfig);          
