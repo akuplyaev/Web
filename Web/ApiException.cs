@@ -11,14 +11,9 @@ namespace Web
 {
     public class MyApiException : ExceptionFilterAttribute
     {
-        public Type ExceptionType { get; set; }
-        public string Message { get; set; }
-        public HttpStatusCode StatusCode { get; set; }
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
-            Console.WriteLine("Web-API: "+actionExecutedContext.Exception.Message);           
+            Console.WriteLine("Web-API: " + actionExecutedContext.Exception.Message);
         }
-
-
     }
 }

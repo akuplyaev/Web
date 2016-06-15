@@ -11,7 +11,6 @@ namespace Web
     {
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {           
-            
             actionExecutedContext.Response.Headers.Add("X-TEST-ID", Guid.NewGuid().ToString());
         }
 
