@@ -18,8 +18,8 @@ namespace Web {
         };
 
         //get
-        public IEnumerable<Task> Get() {
-            return Tasks;
+        public IEnumerable<Task> Get() {           
+                throw new Exception();                      
         }
         //get(task)
         public IHttpActionResult Get(int id) {

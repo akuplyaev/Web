@@ -17,17 +17,7 @@ namespace Web
         {
             var webapiconfig = ConfigureWebApi();
             app.Use<OwinException>();
-            app.Use<HelloTest>();
-            //app.Use(async (context, next) =>
-            //{
-            //    try{
-            //        await next();
-            //    }
-            //    catch (Exception e)
-            //    {
-            //        Console.WriteLine("Web-API:" + e.Message);                   
-            //    }
-            //});
+            app.Use<HelloTest>();         
             app.UseWebApi(webapiconfig);
         }
 
@@ -40,6 +30,7 @@ namespace Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
                 );
+            config.Filters.Add(new MyApiException());
             return config;
         }
     }

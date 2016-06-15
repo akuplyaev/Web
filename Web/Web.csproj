@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiException.cs" />
     <Compile Include="OwinException.cs" />
     <Compile Include="OwinHello.cs" />
     <Compile Include="Program.cs" />
