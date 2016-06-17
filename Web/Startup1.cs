@@ -31,7 +31,7 @@ namespace Web
                 defaults: new { id = RouteParameter.Optional }
                 );
             config.Filters.Add(new MyApiException());
-            config.Filters.Add(new ActionRes());
+            config.Filters.Add(new ActionAddHeader());
             return config;
         }
     }

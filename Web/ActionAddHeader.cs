@@ -7,7 +7,7 @@ using System.Web.Http.Filters;
 
 namespace Web
 {
-    public class ActionRes: ActionFilterAttribute
+    public class ActionAddHeader: ActionFilterAttribute
     {
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {           

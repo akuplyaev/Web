@@ -26,22 +26,14 @@ namespace Web
             return Tasks;
         }
         //get(task)
-        [Route("{id=1}")]
+        [Route("{id}")]
         public Task Get(int id)
         {
-            var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);
-            try
-            {
+            var task = Tasks.FirstOrDefault(t => t.GUID_Id == id);           
                 if (task == null)
                 {
                     throw new HttpResponseException(HttpStatusCode.NotFound);
-                }
-            }
-            catch (HttpResponseException e)
-            {
-                Console.WriteLine("Web-API:" + e.Message);
-                Console.WriteLine("Web-API:" + e.Response.StatusCode);
-            }
+                }           
             return task;
         }
         //delete(task)
